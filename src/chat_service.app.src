@@ -1,0 +1,16 @@
+{application, chat_service,
+ [
+  {description, "Simple chat service"},
+  {vsn, "1.0.0"},
+  {registered, []},
+  {modules, []},
+  {applications, [
+                  kernel,
+                  stdlib,
+                  lager,
+                  ranch,
+                  bert
+                 ]},
+  {mod, { chat_service_app, []}},
+  {env, []}
+ ]}.
