@@ -10,9 +10,10 @@
     lager:critical(Format, Args)).
 
 -define(CONNECTIONS_TABLE, chat_service_connections).
--define(MESSAGES_TABLE, chat_service_messages).
 
--define(CONNECTED, 1).
--define(DISCONNECTED, 0).
+-define(CONNECTED, <<"connected">>).
+-define(DISCONNECTED, <<"disconnected">>).
+-define(ADDR_IN_USE, <<"address in use">>).
+-define(NAME_IN_USE, <<"name in use">>).
 
 

@@ -9,7 +9,7 @@
                   stdlib,
                   lager,
                   ranch,
-                  bert
+                  jsx
                  ]},
   {mod, { chat_service_app, []}},
   {env, []}

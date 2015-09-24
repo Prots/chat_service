@@ -18,9 +18,17 @@ loop(Socket, Transport) ->
     {OK, Closed, Error} = Transport:messages(),
     Transport:setopts(Socket, [{active, once}]),
     receive
+        {OK, Socket, <<"\r\n">>} ->
+            loop(Socket, Transport);
         {OK, Socket, Data} ->
-            ?LOG_INFO("Socket:~p, Data via TCP: ~p~n", [Socket, Data]),
-            Transport:send(Socket, Data),
+            ?LOG_INFO("Socket:~p, Request via TCP: ~p~n", [Socket, Data]),
+            PropList = chat_service_protocol:decode(Data),
+            Type = proplists:get_value(<<"type">>, PropList, undefined),
+            Args = proplists:get_value(<<"args">>, PropList, undefined),
+            Response = chat_service_protocol:process_request(Type, Args, [{<<"socket">>, Socket}], tcp),
+            RespBody = chat_service_protocol:encode(Response),
+            ?LOG_INFO("Socket:~p, Response via TCP: ~p~n", [Socket, RespBody]),
+            Transport:send(Socket, RespBody),
             loop(Socket, Transport);
         {Closed, Socket} ->
             ok;

@@ -1,0 +1,34 @@
+Sync calls
+Request:
+{"type":"connect", "args":{"client_name":"Name"}}
+Response:
+{"type":"contacts", "args":{"client_name":"Name1"},{"client_name":"Name2"},{"client_name":"Name3"}}
+
+
+Request:
+{"type":"disconnect","args":{"client_name":"Name"}}
+Response:
+"ok"
+
+
+Request:
+{"type":"get_contacts", "args":{"client_name":"Name"}}
+Response:
+{"type":"contacts", "args":{"client_name":"Name1"},{"client_name":"Name2"},{"client_name":"Name3"}}
+
+
+Request:
+{"type":"send_message", "args":{"from":"ClientName1", "to":"ClientName2", "msg":"Msg"}}
+Response:
+"ok"
+
+Notifications (async calls):
+
+{"type":"new_connection", "args":{"client_name":"ClientName1"}}
+
+{"type":"disconnected","args":{"client_name":"Name"}}
+
+{"type":"new_message", "args":{"from":"ClientName1", "msg":"Msg"}}
+
+
+{"type":"send_message", "args":{"from":"Name4", "to":"Name5", "msg":"Msg"}}
